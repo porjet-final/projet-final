@@ -27,3 +27,20 @@ NB_REQUETES=$(echo "$LOGS" | wc -l)
 
 # Compter les erreurs 404 : le champ 9 contient le code de reponse
 NB_404=$(echo "$LOGS" | cut -d' ' -f9 | grep -c '^404$')
+# IP la plus active : champ 1, tri, comptage, tri decroissant, premiere ligne, deuxieme colonne
+TOP_IP=$(echo "$LOGS" | cut -d' ' -f1 | sort | uniq -c | sort -rn | head -n 1 | awk '{print $2}')
+
+# Page la plus demandee : champ 7, meme principe
+TOP_PAGE=$(echo "$LOGS" | cut -d' ' -f7 | sort | uniq -c | sort -rn | head -n 1 | awk '{print $2}')
+
+# Afficher le nombre total de requetes
+echo "Requetes : $NB_REQUETES"
+
+# Afficher le nombre d'erreurs 404
+echo "Erreurs 404 : $NB_404"
+
+# Afficher l'adresse IP la plus active
+echo "IP la plus active : $TOP_IP"
+
+# Afficher la page la plus demandee
+echo "Page la plus demandee : $TOP_PAGE"
