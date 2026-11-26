@@ -4,7 +4,7 @@
 echo "Début du déploiement"
 
 # Se placer dans le dossier du projet
-cd "$(dirname "$0")/.." || exit 1
+cd "$(dirname "$0")/.." || { echo "Échec du changement de répertoire vers le projet"; exit 1; }
 
 # Récupérer les dernières modifications de GitHub
 git pull --ff-only origin main ||  { echo "Échec de la récupération des modifications depuis GitHub"; exit 1; }
