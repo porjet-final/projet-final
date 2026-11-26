@@ -6,10 +6,11 @@ CONTAINER="${1:-site}"
 
 # Vérifier si le conteneur existe et tourne, sinon afficher une erreur et quitter
 if ! docker inspect "$CONTAINER" > /dev/null 2>&1; then
-    # Afficher le message d'erreur explicite
-    echo "Erreur : le conteneur '$CONTAINER' n'existe pas."
-    # Quitter avec un code de retour en erreur
+        # Afficher un message d'erreur detaille precisant le nom du conteneur introuvable
+    echo "Erreur critique : le conteneur Docker '$CONTAINER' est introuvable ou n'est pas demarre."
+    # Quitter avec le code retour 1 indiquant un echec d'execution
     exit 1
+
 fi
 # Lire le journal du conteneur et garder uniquement les lignes de requetes HTTP
 LOGS=$(docker logs "$CONTAINER" 2>/dev/null | grep 'HTTP/')
