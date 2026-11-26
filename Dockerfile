@@ -7,4 +7,4 @@ COPY site/ /var/www/html/
 
 # Documenter le port HTTP utilisé par Apache
 # Le port 8081 de la machine hôte sera redirigé vers ce port
-EXPOSE 80
+EXPOSE 80git status
