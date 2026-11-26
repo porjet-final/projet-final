@@ -1,0 +1,19 @@
+body {
+    max-width: 720px;
+    margin: 48px auto;
+    padding: 0 20px;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f3f6fb;
+    color: #182338;
+}
+
+h1 {
+    color: #174ea6;
+}
+
+section {
+    padding: 20px;
+    background-color: white;
+    border-radius: 12px;
+}
