@@ -11,3 +11,19 @@ if ! docker inspect "$CONTAINER" > /dev/null 2>&1; then
     # Quitter avec un code de retour en erreur
     exit 1
 fi
+# Lire le journal du conteneur et garder uniquement les lignes de requetes HTTP
+LOGS=$(docker logs "$CONTAINER" 2>/dev/null | grep 'HTTP/')
+
+# Si aucune ligne n'est trouvee, le site n'a recu aucune visite
+if [ -z "$LOGS" ]; then
+    # Afficher un message clair
+    echo "Aucune visite enregistree pour le conteneur '$CONTAINER'."
+    # Quitter avec un code d'erreur
+    exit 1
+fi
+
+# Compter le nombre total de requetes (une par ligne)
+NB_REQUETES=$(echo "$LOGS" | wc -l)
+
+# Compter les erreurs 404 : le champ 9 contient le code de reponse
+NB_404=$(echo "$LOGS" | cut -d' ' -f9 | grep -c '^404$')
